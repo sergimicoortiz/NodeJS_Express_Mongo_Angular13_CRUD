@@ -6,8 +6,5 @@ function get_products(req, res) {
     res.json(products);
 }
 
-const product_controller = {
-    get_products
-}
 
-export default product_controller;
+export { get_products };
