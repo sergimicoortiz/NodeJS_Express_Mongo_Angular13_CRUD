@@ -1,15 +1,15 @@
-import Category from "../models/category_model.js";
+import Product from "../models/product_model.js";
 
-async function getall_Category(req, res) {
+async function getall_products(req, res) {
     try {
-        const Category = await Category.find();
-        res.json(Category);
+        const products = await Product.find();
+        res.json(products);
     } catch (error) {
         res.status(500).json({ msg: "An error has ocurred" });
     }//end trycath
 }//getall_products
 
-async function getone_Category(req, res) {
+async function getone_product(req, res) {
     try {
         const id = req.params.id
         const product = await Product.findById(id);
@@ -22,7 +22,7 @@ async function getone_Category(req, res) {
         if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
     }
-};//getone_product
+};
 
 async function create_product(req, res) {
     try {
@@ -51,24 +51,13 @@ async function delete_product(req, res) {
         if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
     }//end try catch
-}//delete_product
-
-async function update_product() {
-    try {
-        const id = req.params.id
-        res.json({ msg: "Product deleted" })
-    } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
-    }
-}//update_product
+}
 
 const product_controller = {
     getall_products: getall_products,
     getone_product: getone_product,
     create_product: create_product,
-    delete_product: delete_product,
-    update_product: update_product
+    delete_product: delete_product
 }
 
 export default product_controller;
