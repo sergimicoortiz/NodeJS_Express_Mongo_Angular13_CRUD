@@ -8,7 +8,9 @@ function fake_products(n) {
             id: i + 1,
             name: faker.commerce.product(),
             price: parseInt(faker.commerce.price(10, 300)),
-            description: faker.lorem.paragraph()
+            description: faker.lorem.paragraph(),
+            owner: faker.name.firstName(),
+            picture: ['pic1', 'pic2', 'pic3']
         };
         products.push(product);
     }//for
