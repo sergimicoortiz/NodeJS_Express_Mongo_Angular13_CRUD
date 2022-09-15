@@ -1,7 +1,4 @@
-import Product from "../../models/product_model.js";
-//import fake_products from "../utils/fake_products.js";
-
-//let products = fake_products(10);
+import Product from "../models/product_model.js";
 
 async function getall_products(req, res) {
     try {

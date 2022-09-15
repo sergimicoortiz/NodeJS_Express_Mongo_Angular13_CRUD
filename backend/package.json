@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "product_dummy": "node ./app/utils/insert_fake_products.js"
   },
   "keywords": [],
   "author": "",
