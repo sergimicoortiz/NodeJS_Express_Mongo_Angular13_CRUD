@@ -1,15 +1,15 @@
-import Category from "../models/category_model.js";
+import Product from "../models/product_model.js";
 
-async function getall_Category(req, res) {
+async function getall_products(req, res) {
     try {
-        const Category = await Category.find();
-        res.json(Category);
+        const products = await Product.find();
+        res.json(products);
     } catch (error) {
         res.status(500).json({ msg: "An error has ocurred" });
     }//end trycath
 }//getall_products
 
-async function getone_Category(req, res) {
+async function getone_product(req, res) {
     try {
         const id = req.params.id
         const product = await Product.findById(id);
