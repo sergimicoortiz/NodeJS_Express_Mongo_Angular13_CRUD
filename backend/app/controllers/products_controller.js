@@ -53,10 +53,19 @@ async function delete_product(req, res) {
     }//end try catch
 }//delete_product
 
-async function update_product() {
+async function update_product(req, res) {
     try {
         const id = req.params.id
-        res.json({ msg: "Product deleted" })
+        const product_data = {
+            name: req.body.name || null,
+            price: req.body.price || 0,
+            description: req.body.description || null,
+            owner: req.body.owner || null,
+            picture: req.body.picture || [null],
+        };
+        const update = await Product.findByIdAndUpdate(id, product_data);
+        if (!update) { res.status(404).json({ msg: "Product not found" }); }
+        res.json({ msg: "Product updated" })
     } catch (error) {
         if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
