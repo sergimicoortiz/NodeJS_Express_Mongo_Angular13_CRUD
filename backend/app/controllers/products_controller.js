@@ -22,7 +22,7 @@ async function getone_product(req, res) {
         if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
     }
-};
+};//getone_product
 
 async function create_product(req, res) {
     try {
@@ -51,13 +51,24 @@ async function delete_product(req, res) {
         if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
     }//end try catch
-}
+}//delete_product
+
+async function update_product() {
+    try {
+        const id = req.params.id
+        res.json({ msg: "Product deleted" })
+    } catch (error) {
+        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
+        res.status(500).json({ msg: "An error has ocurred" });
+    }
+}//update_product
 
 const product_controller = {
     getall_products: getall_products,
     getone_product: getone_product,
     create_product: create_product,
-    delete_product: delete_product
+    delete_product: delete_product,
+    update_product: update_product
 }
 
 export default product_controller;
