@@ -1,63 +1,76 @@
-import Product from "../models/product_model.js";
+import Category from "../models/category_model.js";
 
-async function getall_products(req, res) {
+async function getall_category(req, res) {
     try {
-        const products = await Product.find();
-        res.json(products);
+        const category = await Category.find();
+        res.json(category);
     } catch (error) {
         res.status(500).json({ msg: "An error has ocurred" });
     }//end trycath
-}//getall_products
+}//getall_category
 
-async function getone_product(req, res) {
+async function getone_category(req, res) {
     try {
         const id = req.params.id
-        const product = await Product.findById(id);
-        if (!product) {
-            res.status(404).json({ msg: "Product not found" })
+        const category = await Category.findById(id);
+        if (!category) {
+            res.status(404).json({ msg: "Category not found" })
         } else {
-            res.json(product);
+            res.json(category);
         };
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
+        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
     }
 };
 
-async function create_product(req, res) {
+async function create_category(req, res) {
     try {
-        const product_data = {
-            name: req.body.name || null,
-            price: req.body.price || 0,
-            description: req.body.description || null,
-            owner: req.body.owner || null,
-            picture: req.body.picture || [null],
+        const category_data = {
+            category_name: req.body.category_name || null,
+            category_picture: req.body.category_picture || null,
         };
-        const product = new Product(product_data);
-        await product.save();
-        res.json(product_data);
+        const category = new Category(category_data);
+        await category.save();
+        res.json(category_data);
     } catch (error) {
         res.status(500).json({ msg: "An error has ocurred" });
     }//end try cath
-}//create_product
+}//create_category
 
-async function delete_product(req, res) {
+async function delete_category(req, res) {
     try {
         const id = req.params.id
-        const product = await Product.findByIdAndDelete(id);
-        if (!product) { res.status(404).json({ msg: "Product not found" }); }
-        res.json({ msg: "Product deleted" })
+        const category = await Category.findByIdAndDelete(id);
+        if (!category) { res.status(404).json({ msg: "Category not found" }); }
+        res.json({ msg: "Category deleted" })
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
+        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
         res.status(500).json({ msg: "An error has ocurred" });
     }//end try catch
 }
 
-const product_controller = {
-    getall_products: getall_products,
-    getone_product: getone_product,
-    create_product: create_product,
-    delete_product: delete_product
+async function update_category(req, res) {
+    try {
+        const id = req.params.id
+        const category = await Category.findByIdAndUpdate(id, {
+            category_name: req.body.category_name,
+            category_picture: req.body.category_picture
+        });
+        if (!category) { res.status(404).json({ msg: "Category not found" }); }
+        res.json({ msg: "Category updated" })
+    } catch (error) {
+        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
+        res.status(500).json({ msg: "An error has ocurred" });
+    }//end try catch
 }
 
-export default product_controller;
+const category_controller = {
+    getall_category: getall_category,
+    getone_category: getone_category,
+    create_category: create_category,
+    delete_category: delete_category,
+    update_category: update_category
+}
+
+export default category_controller;

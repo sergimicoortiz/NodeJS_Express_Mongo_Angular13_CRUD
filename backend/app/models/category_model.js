@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const Category_shcema = new mongoose.Schema({
+const category_shcema = new mongoose.Schema({
     category_name: String,
     category_picture: String
 });
 
-const Category = mongoose.model('Category', Category_shcema);
+const Category = mongoose.model('Category', category_shcema);
 
 export default Category;
