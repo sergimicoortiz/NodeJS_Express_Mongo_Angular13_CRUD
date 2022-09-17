@@ -10,6 +10,7 @@ function fake_products(n) {
             price: parseInt(faker.commerce.price(10, 300)),
             description: faker.lorem.paragraph(),
             owner: faker.name.firstName(),
+            category: faker.commerce.productAdjective(),
             picture: ['pic1', 'pic2', 'pic3']
         };
         products.push(product);

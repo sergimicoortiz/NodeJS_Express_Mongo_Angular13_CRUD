@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const product_shcema = new mongoose.Schema({
-    //id: Number,
     name: String,
     price: Number,
     description: String,
     owner: String,
+    category: String,
     picture: [String]
 });
 

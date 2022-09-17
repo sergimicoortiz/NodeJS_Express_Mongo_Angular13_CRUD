@@ -31,11 +31,12 @@ async function create_product(req, res) {
             price: req.body.price || 0,
             description: req.body.description || null,
             owner: req.body.owner || null,
+            category: req.body.category || null,
             picture: req.body.picture || [null],
         };
         const product = new Product(product_data);
-        await product.save();
-        res.json(product_data);
+        const new_product = await product.save();
+        res.json(new_product);
     } catch (error) {
         res.status(500).json({ msg: "An error has ocurred" });
     }//end try cath
@@ -45,6 +46,7 @@ async function delete_product(req, res) {
     try {
         const id = req.params.id
         const product = await Product.findByIdAndDelete(id);
+        //console.log(product);
         if (!product) { res.status(404).json({ msg: "Product not found" }); }
         res.json({ msg: "Product deleted" })
     } catch (error) {
@@ -61,9 +63,11 @@ async function update_product(req, res) {
             price: req.body.price || 0,
             description: req.body.description || null,
             owner: req.body.owner || null,
+            category: req.body.category || null,
             picture: req.body.picture || [null],
         };
         const update = await Product.findByIdAndUpdate(id, product_data);
+        //console.log(update);
         if (!update) { res.status(404).json({ msg: "Product not found" }); }
         res.json({ msg: "Product updated" })
     } catch (error) {

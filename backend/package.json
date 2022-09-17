@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "product_dummy": "node ./app/utils/insert_fake_products.js"
+    "product_dummy": "node ./app/utils/insert_fake_products.js",
+    "category_dummy": "node ./app/utils/insert_categorys.js"
   },
   "keywords": [],
   "author": "",

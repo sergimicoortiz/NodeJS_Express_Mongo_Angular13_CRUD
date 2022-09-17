@@ -2,20 +2,19 @@
 
 import dotenv from "dotenv"
 import connectdb from "../config/config_db.js"
-import fake_products from "./fake_products.js"
-import Product from "../models/product_model.js"
+import categorys from './data_categorys.js'
+import Category from '../models/category_model.js'
 
 dotenv.config();
 connectdb(process.env.MONGO_URI).
     then(d => {
-        Product.collection.drop().
+        Category.collection.drop().
             then(dd => {
-                const products = fake_products(process.env.DUMMY_PRODUCTS || 10);
-                products.forEach((product_data, i) => {
-                    const product = new Product(product_data);
-                    product.save()
+                categorys.forEach((category_data, i) => {
+                    const category = new Category(category_data);
+                    category.save()
                         .then(data => {
-                            console.log(`Product Nº${i + 1} added.`);
+                            console.log(`category Nº${i + 1} added.`);
                         }).catch(error => {
                             console.error(error);
                             process.exit(1);
@@ -25,6 +24,7 @@ connectdb(process.env.MONGO_URI).
                 console.error(error);
                 process.exit(1);
             });
+
     }).catch(error => {
         console.error(error);
         process.exit(1);
