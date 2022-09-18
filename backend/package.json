@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -22,6 +21,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
-    "nodemon": "^2.0.19"
-  }
+    "nodemon": "^2.0.20"
+  },
+  "description": ""
 }
