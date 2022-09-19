@@ -76,12 +76,22 @@ async function update_product(req, res) {
     }
 }//update_product
 
+async function deleteAll_product(req, res) {
+    try {
+        const deleteALL = await Product.collection.drop();
+        res.json({ msg: "Colection products deleted" });
+    } catch (error) {
+        res.status(500).json({ msg: "An error has ocurred" });
+    }
+}//deleteAll_product
+
 const product_controller = {
     getall_products: getall_products,
     getone_product: getone_product,
     create_product: create_product,
     delete_product: delete_product,
-    update_product: update_product
+    update_product: update_product,
+    deleteAll_product: deleteAll_product
 }
 
 export default product_controller;

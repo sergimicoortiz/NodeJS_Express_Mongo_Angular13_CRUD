@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddProductComponent implements OnInit {
 
+  update: Boolean = false;
   new_product: Product = {
     name: "",
     price: 0,
@@ -23,6 +24,7 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     if (this.route.snapshot.params["id"]) {
       this.get_product(this.route.snapshot.params["id"]);
+      this.update = true;
     }
   }
 
@@ -41,10 +43,26 @@ export class AddProductComponent implements OnInit {
   }//insert_product
 
   update_product(): void {
-
+    this.product_service.update_product(this.new_product, this.route.snapshot.params["id"]).subscribe({
+      next: data => {
+        //console.log(data);
+        this.router.navigate(['/product']);
+      },
+      error: e => {
+        console.error(e);
+      }
+    });
   }//update_product
 
   get_product(id: String): void {
-    console.log(id);
+    this.product_service.get_product(id).subscribe({
+      next: data => {
+        this.new_product = data;
+      },
+      error: e => {
+        console.error(e);
+      }
+    });
   }//get_product
+
 }//class

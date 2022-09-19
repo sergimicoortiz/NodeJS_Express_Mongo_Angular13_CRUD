@@ -43,4 +43,16 @@ export class ListProductsComponent implements OnInit {
     this.currentProduct = product;
   }
 
+  delete_all_product(): void {
+    this.productService.delete_all_products().subscribe({
+      next: data => {
+        //console.log(data);
+        this.products = [];
+      },
+      error: e => {
+        console.error(e);
+      }
+    });
+  }
+
 }
