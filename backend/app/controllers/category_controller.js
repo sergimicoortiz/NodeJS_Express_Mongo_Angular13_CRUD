@@ -65,12 +65,26 @@ async function update_category(req, res) {
     }//end try catch
 }
 
+
+async function deleteAll_category(req, res) {
+    try {
+        const id = req.params.id
+        const category = Category.collection.drop();
+        if (!category) { res.status(404).json({ msg: "Category not found" }); }
+        res.json({ msg: "Category updated" })
+    } catch (error) {
+        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
+        res.status(500).json({ msg: "An error has ocurred" });
+    }//end try catch
+}
+
 const category_controller = {
     getall_category: getall_category,
     getone_category: getone_category,
     create_category: create_category,
     delete_category: delete_category,
-    update_category: update_category
+    update_category: update_category,
+    deleteAll_category: deleteAll_category
 }
 
 export default category_controller;

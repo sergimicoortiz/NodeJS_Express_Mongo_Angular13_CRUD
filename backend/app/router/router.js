@@ -16,6 +16,7 @@ router.get('/category/:id', category_controller.getone_category);
 router.post('/category', category_controller.create_category);
 router.delete('/category/:id', category_controller.delete_category);
 router.put('/category/:id', category_controller.update_category);
+router.delete('/category_all', category_controller.deleteAll_category);
 
 
 export default router;

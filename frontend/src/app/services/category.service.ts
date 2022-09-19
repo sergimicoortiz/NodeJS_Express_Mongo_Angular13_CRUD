@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 
 const baseUrl = 'http://localhost:3001/category';
-console.log(baseUrl)
+const removeAllUrl = 'http://localhost:3001/category_all'
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class CategoryService {
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
+    return this.http.delete(removeAllUrl);
   }
 
   findByCategory_name(category_name: any): Observable<Category[]> {

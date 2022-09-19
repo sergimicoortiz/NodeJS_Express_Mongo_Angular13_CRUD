@@ -25,7 +25,6 @@ export class CategoryDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    console.log("asd")
     if (!this.viewMode) {
       this.message = '';
       this.getCategory(this.route.snapshot.params["id"]);
@@ -37,7 +36,6 @@ export class CategoryDetailsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.currentCategory = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });
@@ -54,7 +52,6 @@ export class CategoryDetailsComponent implements OnInit {
     this.categoryService.update(this.currentCategory._id, data)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.message = res.message ? res.message : 'The status was updated successfully!';
         },
         error: (e) => console.error(e)

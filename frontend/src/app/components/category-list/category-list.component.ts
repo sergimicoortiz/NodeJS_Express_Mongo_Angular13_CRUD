@@ -25,7 +25,6 @@ export class CategoryListComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.category = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });
@@ -42,16 +41,16 @@ export class CategoryListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  // removeAllCategory(): void {
-  //   this.categoryService.deleteAll()
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.refreshList();
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
+  removeAllCategory(): void {
+    this.categoryService.deleteAll()
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.refreshList();
+        },
+        error: (e) => console.error(e)
+      });
+  }
 
   searchCategory_name(): void {
     this.currentCategory = {};
@@ -61,7 +60,6 @@ export class CategoryListComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.category = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });
