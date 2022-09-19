@@ -6,16 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddCrudComponent } from './components/add-crud/add-crud.component';
-import { CrudDetailsComponent } from './components/crud-details/crud-details.component';
-import { CrudListComponent } from './components/crud-list/crud-list.component';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
+import { CategoryDetailsComponent } from './components/category-details/category-details.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddCrudComponent,
-    CrudDetailsComponent,
-    CrudListComponent
+    AddCategoryComponent,
+    CategoryDetailsComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,

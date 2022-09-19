@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrudListComponent } from './components/crud-list/crud-list.component';
-import { CrudDetailsComponent } from './components/crud-details/crud-details.component';
-import { AddCrudComponent } from "./components/add-crud/add-crud.component";
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { CategoryDetailsComponent } from './components/category-details/category-details.component';
+import { AddCategoryComponent } from "./components/add-category/add-category.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'crud', pathMatch: 'full' },
-  { path: 'crud', component: CrudListComponent },
-  { path: 'crud/:id', component: CrudDetailsComponent },
-  { path: 'add', component: AddCrudComponent }
+  { path: '', redirectTo: 'category', pathMatch: 'full' },
+  { path: 'category', component: CategoryListComponent },
+  { path: 'category/:id', component: CategoryDetailsComponent },
+  { path: 'add', component: AddCategoryComponent }
 ];
 
 @NgModule({

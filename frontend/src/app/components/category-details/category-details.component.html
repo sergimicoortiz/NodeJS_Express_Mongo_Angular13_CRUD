@@ -1,0 +1,53 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentCategory._id">
+        <h4>Category</h4>
+        <div>
+            <label><strong>Category name:</strong></label> {{ currentCategory.category_name }}
+        </div>
+        <div>
+            <label><strong>Category picture:</strong></label>
+            {{ currentCategory.category_picture }}
+        </div>
+
+        <a class="badge badge-warning" routerLink="/category/{{ currentCategory._id }}">
+            Edit
+        </a>
+    </div>
+
+    <div *ngIf="!currentCategory">
+        <br />
+        <p>Please click on a Category...</p>
+    </div>
+</div>
+
+<ng-template #editable>
+    <div *ngIf="currentCategory._id" class="edit-form">
+        <h4>Category</h4>
+        <form>
+            <div class="form-group">
+                <label for="category_name">Category name</label>
+                <input type="text" class="form-control" id="category_name" [(ngModel)]="currentCategory.category_name"
+                    name="category_name" />
+            </div>
+            <div class="form-group">
+                <label for="category_picture">Category picture</label>
+                <input type="text" class="form-control" id="category_picture" [(ngModel)]="currentCategory.category_picture"
+                    name="category_picture" />
+            </div>
+
+        </form>
+        <button class="badge badge-danger mr-2" (click)="deleteCategory()">
+            Delete
+        </button>
+
+        <button type="submit" class="badge badge-success mb-2" (click)="updateCategory()">
+            Update
+        </button>
+        <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="!currentCategory._id">
+        <br />
+        <p>Cannot access this category...</p>
+    </div>
+</ng-template>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Crud } from '../models/crud.model';
+import { Category } from '../models/category.model';
 
 const baseUrl = 'http://localhost:3001/category';
 console.log(baseUrl)
@@ -9,15 +9,15 @@ console.log(baseUrl)
 @Injectable({
   providedIn: 'root'
 })
-export class CrudService {
+export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Crud[]> {
-    return this.http.get<Crud[]>(baseUrl);
+  getAll(): Observable<Category[]> {
+    return this.http.get<Category[]>(baseUrl);
   }
 
-  get(id: any): Observable<Crud> {
+  get(id: any): Observable<Category> {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
@@ -37,7 +37,7 @@ export class CrudService {
     return this.http.delete(baseUrl);
   }
 
-  findByCategory_name(category_name: any): Observable<Crud[]> {
-    return this.http.get<Crud[]>(`${baseUrl}?category_name=${category_name}`);
+  findByCategory_name(category_name: any): Observable<Category[]> {
+    return this.http.get<Category[]>(`${baseUrl}?category_name=${category_name}`);
   }
 }

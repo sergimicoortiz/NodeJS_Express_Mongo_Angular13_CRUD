@@ -1,18 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Crud } from '../../models/crud.model';
+import { Category } from '../../models/category.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CrudService } from 'src/app/services/crud.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
-  selector: 'app-crud-details',
-  templateUrl: './crud-details.component.html',
-  styleUrls: ['./crud-details.component.css']
+  selector: 'app-category-details',
+  templateUrl: './category-details.component.html',
+  styleUrls: ['./category-details.component.css']
 })
-export class CrudDetailsComponent implements OnInit {
+export class CategoryDetailsComponent implements OnInit {
 
   @Input() viewMode = false;
 
-  @Input() currentCrud: Crud = {
+  @Input() currentCategory: Category = {
     category_name: '',
     category_picture: ''
   };
@@ -20,7 +20,7 @@ export class CrudDetailsComponent implements OnInit {
   message = '';
 
   constructor(
-    private crudService: CrudService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -28,15 +28,15 @@ export class CrudDetailsComponent implements OnInit {
     console.log("asd")
     if (!this.viewMode) {
       this.message = '';
-      this.getCrud(this.route.snapshot.params["id"]);
+      this.getCategory(this.route.snapshot.params["id"]);
     }
   }
 
-  getCrud(id: string): void {
-    this.crudService.get(id)
+  getCategory(id: string): void {
+    this.categoryService.get(id)
       .subscribe({
         next: (data) => {
-          this.currentCrud = data;
+          this.currentCategory = data;
           console.log(data);
         },
         error: (e) => console.error(e)
@@ -45,13 +45,13 @@ export class CrudDetailsComponent implements OnInit {
 
   updatePublished(status: boolean): void {
     const data = {
-      category_name: this.currentCrud.category_name,
-      category_picture: this.currentCrud.category_picture
+      category_name: this.currentCategory.category_name,
+      category_picture: this.currentCategory.category_picture
     };
 
     this.message = '';
 
-    this.crudService.update(this.currentCrud._id, data)
+    this.categoryService.update(this.currentCategory._id, data)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -61,10 +61,10 @@ export class CrudDetailsComponent implements OnInit {
       });
   }
 
-  updateCrud(): void {
+  updateCategory(): void {
     this.message = '';
 
-    this.crudService.update(this.currentCrud._id, this.currentCrud)
+    this.categoryService.update(this.currentCategory._id, this.currentCategory)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -74,12 +74,12 @@ export class CrudDetailsComponent implements OnInit {
       });
   }
 
-  deleteCrud(): void {
-    this.crudService.delete(this.currentCrud._id)
+  deleteCategory(): void {
+    this.categoryService.delete(this.currentCategory._id)
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.router.navigate(['/crud']);
+          this.router.navigate(['/category']);
         },
         error: (e) => console.error(e)
       });

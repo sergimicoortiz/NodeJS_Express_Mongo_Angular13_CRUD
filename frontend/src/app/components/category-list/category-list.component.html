@@ -10,19 +10,19 @@
         </div>
     </div>
     <div class="col-md-6">
-        <h4>Crud List</h4>
+        <h4>Category List</h4>
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let crud of crud; let i = index"
-                [class.active]="i == currentIndex" (click)="setActiveCrud(crud, i)">
-                {{ crud.category_name }}
+            <li class="list-group-item" *ngFor="let category of category; let i = index"
+                [class.active]="i == currentIndex" (click)="setActiveCategory(category, i)">
+                {{ category.category_name }}
             </li>
         </ul>
 
-        <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllCrud()">
+        <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllCategory()">
             Remove All
         </button> -->
     </div>
     <div class="col-md-6">
-        <app-crud-details [viewMode]="true" [currentCrud]="currentCrud"></app-crud-details>
+        <app-category-details [viewMode]="true" [currentCategory]="currentCategory"></app-category-details>
     </div>
 </div>
