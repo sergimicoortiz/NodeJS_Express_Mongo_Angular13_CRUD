@@ -1,0 +1,58 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentProduct._id">
+        <h4>product</h4>
+        <div>
+            <label><strong>Name:</strong></label> {{ currentProduct.name }}
+        </div>
+        <div>
+            <label><strong>Description:</strong></label> {{ currentProduct.description }}
+        </div>
+        <div>
+            <label><strong>Category:</strong></label> {{ currentProduct.category }}
+        </div>
+        <div>
+            <label><strong>Price:</strong></label> {{ currentProduct.price }}
+        </div>
+        <div>
+            <label><strong>Owner:</strong></label> {{ currentProduct.owner }}
+        </div>
+
+        <a class="badge badge-warning" routerLink="/products/{{ currentProduct._id }}">
+            Edit
+        </a>
+        <a class="badge badge-danger mr-2" (click)="deleteProduct(currentProduct._id)">Delete</a>
+    </div>
+
+    <div *ngIf="currentProduct.name == ''">
+        <br />
+        <p>Please click on a product...</p>
+    </div>
+</div>
+
+<ng-template #editable>
+    <div *ngIf="currentProduct._id" class="edit-form">
+        <h4>product</h4>
+        <form>
+            <div class="form-group">
+                <label for="name">product name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="currentProduct.name" name="name" />
+            </div>
+            <div class="form-group">
+                <label for="product_picture">product picture</label>
+                <input type="text" class="form-control" id="product_picture" [(ngModel)]="currentProduct.price"
+                    name="product_picture" />
+            </div>
+
+        </form>
+
+        <button type="submit" class="badge badge-success mb-2" (click)="updateProduct()">
+            Update
+        </button>
+        <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="!currentProduct._id">
+        <br />
+        <p>Cannot access this product...</p>
+    </div>
+</ng-template>

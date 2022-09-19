@@ -9,13 +9,17 @@ import { AppComponent } from './app.component';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddCategoryComponent,
     CategoryDetailsComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    ListProductsComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule,

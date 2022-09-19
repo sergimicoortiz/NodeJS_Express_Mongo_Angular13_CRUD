@@ -1,0 +1,24 @@
+<div class="list row">
+    <!-- <div class="col-md-8">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by category name" [(ngModel)]="category_name" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="searchCategory_name()">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-md-6">
+        <h4>Crud List</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let product of products; let i = index"
+                [class.active]="i == currentIndex" (click)="set_product(product, i)">
+                {{ product.name }}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <app-detail-product [viewMode]="true" [currentProduct]="currentProduct"></app-detail-product>
+    </div>
+</div>
