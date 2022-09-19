@@ -1,0 +1,37 @@
+<div>
+    <div class="submit-form">
+        <div>
+            <div class="form-group">
+                <label for="product_name">Category name</label>
+                <input type="text" class="form-control" id="product_name" required [(ngModel)]="new_product.name"
+                    name="product_name" />
+            </div>
+
+            <div class="form-group">
+                <label for="product_description">Category description</label>
+                <input class="form-control" id="product_description" required [(ngModel)]="new_product.description"
+                    name="product_description" />
+            </div>
+
+            <div class="form-group">
+                <label for="product_description">Category price</label>
+                <input class="form-control" id="product_description" required [(ngModel)]="new_product.price"
+                    name="product_description" />
+            </div>
+
+            <div class="form-group">
+                <label for="product_description">Category category</label>
+                <input class="form-control" id="product_description" required [(ngModel)]="new_product.category"
+                    name="product_description" />
+            </div>
+
+            <div class="form-group">
+                <label for="product_description">Category owner</label>
+                <input class="form-control" id="product_description" required [(ngModel)]="new_product.owner"
+                    name="product_description" />
+            </div>
+
+            <button (click)="insert_product()" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</div>
