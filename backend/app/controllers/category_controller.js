@@ -14,7 +14,7 @@ async function getall_category(req, res) {
 async function getone_category(req, res) {
     try {
         const id = req.params.id
-        const category = await Category.findById(id);
+        const category = await Category.findOne({ slug: id });
         if (!category) {
             res.status(404).json(FormatError("Category not found", res.statusCode));
         } else {
@@ -43,7 +43,7 @@ async function create_category(req, res) {
 async function delete_category(req, res) {
     try {
         const id = req.params.id
-        const category = await Category.findByIdAndDelete(id);
+        const category = await Category.findOneAndDelete({ slug: id });
         if (!category) { res.status(404).json(FormatError("Category not found", res.statusCode)) }
         res.json(FormatSuccess("Category deleted"))
     } catch (error) {
@@ -55,10 +55,13 @@ async function delete_category(req, res) {
 async function update_category(req, res) {
     try {
         const id = req.params.id
-        const category = await Category.findByIdAndUpdate(id, {
-            category_name: req.body.category_name,
-            category_picture: req.body.category_picture
-        });
+        const old_category = await Category.findOne({ slug: id });
+        if (old_category.category_name !== req.body.category_name && req.body.category_name !== undefined) {
+            old_category.slug = null;
+        }//end if
+        old_category.category_name = req.body.category_name || old_category.category_name;
+        old_category.category_picture = req.body.category_picture || old_category.category_picture;
+        const category = await old_category.save();
         if (!category) { res.status(404).json(FormatError("Category not found", res.statusCode)); }
         res.json({ msg: "Category updated" })
     } catch (error) {
@@ -71,7 +74,7 @@ async function update_category(req, res) {
 async function deleteAll_category(req, res) {
     try {
         const category = await Category.collection.drop();
-        res.json(FormatSuccess('Category deleted'));
+        res.json(FormatSuccess('Category colection deleted'));
     } catch (error) {
         if (error.code === 26) { res.status(404).json(FormatError("Category colection not exist", res.statusCode)); }
         else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }

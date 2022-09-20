@@ -1,5 +1,5 @@
 import Product from "../models/product_model.js";
-import { FormatSuccess } from "../utils/responseApi.js";
+import { FormatSuccess, FormatError } from "../utils/responseApi.js";
 
 async function getall_products(req, res) {
     try {
@@ -13,7 +13,7 @@ async function getall_products(req, res) {
 async function getone_product(req, res) {
     try {
         const id = req.params.id
-        const product = await Product.findById(id);
+        const product = await Product.findOne({ slug: id });
         if (!product) {
             res.status(404).json(FormatError("Product not found", res.statusCode));
         } else {
@@ -46,7 +46,7 @@ async function create_product(req, res) {
 async function delete_product(req, res) {
     try {
         const id = req.params.id
-        const product = await Product.findByIdAndDelete(id);
+        const product = await Product.findOneAndDelete({ slug: id });
         if (!product) { res.status(404).json(FormatError("Product not found", res.statusCode)); }
         res.json(FormatSuccess("Product deleted"));
     } catch (error) {
@@ -58,15 +58,19 @@ async function delete_product(req, res) {
 async function update_product(req, res) {
     try {
         const id = req.params.id
-        const product_data = {
-            name: req.body.name || null,
-            price: req.body.price || 0,
-            description: req.body.description || null,
-            owner: req.body.owner || null,
-            category: req.body.category || null,
-            picture: req.body.picture || [null],
-        };
-        const update = await Product.findByIdAndUpdate(id, product_data);
+        const old_product = await Product.findOne({ slug: id });
+
+        if (old_product.name !== req.body.name && req.body.name !== undefined) {
+            old_product.slug = null;
+        }//end if
+        old_product.name = req.body.name || old_product.name;
+        old_product.price = req.body.price || old_product.price;
+        old_product.description = req.body.description || old_product.description;
+        old_product.owner = req.body.owner || old_product.owner;
+        old_product.category = req.body.category || old_product.category;
+        old_product.picture = req.body.picture || old_product.picture;
+        const update = await old_product.save();
+
         if (!update) { res.status(404).json(FormatError("Product not found", res.statusCode)); }
         res.json({ msg: "Product updated" })
     } catch (error) {
