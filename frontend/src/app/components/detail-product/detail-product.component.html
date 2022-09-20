@@ -1,6 +1,10 @@
-<div *ngIf="viewMode; else editable">
+<!-- <div *ngIf="viewMode; else editable"> -->
+<div>
     <div *ngIf="currentProduct._id">
         <h4>product</h4>
+        <div>
+            <label><strong>ID:</strong></label> {{ currentProduct._id }}
+        </div>
         <div>
             <label><strong>Name:</strong></label> {{ currentProduct.name }}
         </div>
@@ -17,7 +21,7 @@
             <label><strong>Owner:</strong></label> {{ currentProduct.owner }}
         </div>
 
-        <a class="badge badge-warning" routerLink="/products/{{ currentProduct._id }}">
+        <a class="badge badge-warning" routerLink="/update/product/{{ currentProduct._id }}">
             Edit
         </a>
         <a class="badge badge-danger mr-2" (click)="deleteProduct(currentProduct._id)">Delete</a>
@@ -29,7 +33,7 @@
     </div>
 </div>
 
-<ng-template #editable>
+<!-- <ng-template #editable>
     <div *ngIf="currentProduct._id" class="edit-form">
         <h4>product</h4>
         <form>
@@ -55,4 +59,4 @@
         <br />
         <p>Cannot access this product...</p>
     </div>
-</ng-template>
+</ng-template> -->

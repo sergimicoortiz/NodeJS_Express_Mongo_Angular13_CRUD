@@ -1,11 +1,13 @@
+//https://stackoverflow.com/questions/7042340/error-cant-set-headers-after-they-are-sent-to-the-client
 import Category from "../models/category_model.js";
+import { FormatError, FormatSuccess } from '../utils/responseApi.js';
 
 async function getall_category(req, res) {
     try {
         const category = await Category.find();
         res.json(category);
     } catch (error) {
-        res.status(500).json({ msg: "An error has ocurred" });
+        res.status(500).json(FormatError("An error has ocurred", res.statusCode));
     }//end trycath
 }//getall_category
 
@@ -14,13 +16,13 @@ async function getone_category(req, res) {
         const id = req.params.id
         const category = await Category.findById(id);
         if (!category) {
-            res.status(404).json({ msg: "Category not found" })
+            res.status(404).json(FormatError("Category not found", res.statusCode));
         } else {
             res.json(category);
         };
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.kind === 'ObjectId') { res.status(404).json(FormatError("Category not found", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }
 };
 
@@ -32,9 +34,9 @@ async function create_category(req, res) {
         };
         const category = new Category(category_data);
         await category.save();
-        res.json(category_data);
+        res.json(FormatSuccess('Category added', category_data));
     } catch (error) {
-        res.status(500).json({ msg: "An error has ocurred" });
+        res.status(500).json(FormatError("An error has ocurred", res.statusCode));
     }//end try cath
 }//create_category
 
@@ -42,11 +44,11 @@ async function delete_category(req, res) {
     try {
         const id = req.params.id
         const category = await Category.findByIdAndDelete(id);
-        if (!category) { res.status(404).json({ msg: "Category not found" }); }
-        res.json({ msg: "Category deleted" })
+        if (!category) { res.status(404).json(FormatError("Category not found", res.statusCode)) }
+        res.json(FormatSuccess("Category deleted"))
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.kind === 'ObjectId') { res.status(404).json(FormatError("Category not found", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }//end try catch
 }
 
@@ -57,24 +59,22 @@ async function update_category(req, res) {
             category_name: req.body.category_name,
             category_picture: req.body.category_picture
         });
-        if (!category) { res.status(404).json({ msg: "Category not found" }); }
+        if (!category) { res.status(404).json(FormatError("Category not found", res.statusCode)); }
         res.json({ msg: "Category updated" })
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.kind === 'ObjectId') { res.status(404).json(FormatError("Category not found", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }//end try catch
 }
 
 
 async function deleteAll_category(req, res) {
     try {
-        const id = req.params.id
-        const category = Category.collection.drop();
-        if (!category) { res.status(404).json({ msg: "Category not found" }); }
-        res.json({ msg: "Category updated" })
+        const category = await Category.collection.drop();
+        res.json(FormatSuccess('Category deleted'));
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Category not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.code === 26) { res.status(404).json(FormatError("Category colection not exist", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }//end try catch
 }
 
