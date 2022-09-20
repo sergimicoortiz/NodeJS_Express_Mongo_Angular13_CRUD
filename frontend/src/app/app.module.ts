@@ -13,8 +13,13 @@ import { ListProductsComponent } from './components/list-products/list-products.
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 
+//Toaster
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//Form Reactive
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
     }),
   ],
