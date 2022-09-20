@@ -33,9 +33,9 @@ export class AddCategoryComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     this.submitted = true;
-                    console.log()
+                    this.toastrService.success("This category has been aded")
                 },
-                error: (e) => console.log(e)
+                error: (e) => this.toastrService.error("Can't add this category")
             });
     }
 
@@ -46,9 +46,4 @@ export class AddCategoryComponent implements OnInit {
             category_picture: ""
         };
     }
-
-    showAdd(): void {
-        this.toastrService.success('Add success!');
-    }
-
 }

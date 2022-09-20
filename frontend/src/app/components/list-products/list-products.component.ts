@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-products',
@@ -9,7 +10,7 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ListProductsComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private toastrService: ToastrService) { }
 
   products?: Product[];
   currentIndex: Number = -1;
@@ -48,10 +49,9 @@ export class ListProductsComponent implements OnInit {
       next: data => {
         //console.log(data);
         this.products = [];
+        this.toastrService.success("All products has been removed")
       },
-      error: e => {
-        console.error(e);
-      }
+      error: (e) => this.toastrService.error("Can't remove all products")
     });
   }
 
