@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category-details',
@@ -16,13 +17,14 @@ export class CategoryDetailsComponent implements OnInit {
     category_name: '',
     category_picture: ''
   };
-  
+
   message = '';
 
   constructor(
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -52,9 +54,9 @@ export class CategoryDetailsComponent implements OnInit {
     this.categoryService.update(this.currentCategory._id, data)
       .subscribe({
         next: (res) => {
-          this.message = res.message ? res.message : 'The status was updated successfully!';
+          this.toastrService.success("This category has been updated")
         },
-        error: (e) => console.error(e)
+        error: (e) => this.toastrService.error("Can't update this category")
       });
   }
 
@@ -65,9 +67,9 @@ export class CategoryDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.message = res.message ? res.message : 'This tutorial was updated successfully!';
+          this.toastrService.success("This category has been updated")
         },
-        error: (e) => console.error(e)
+        error: (e) => this.toastrService.error("Can't update this category")
       });
   }
 
@@ -77,8 +79,9 @@ export class CategoryDetailsComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.router.navigate(['/category']);
+          this.toastrService.success("This category has been removed")
         },
-        error: (e) => console.error(e)
+        error: (e) => this.toastrService.error("Can't remove this category")
       });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category-list',
@@ -14,7 +15,7 @@ export class CategoryListComponent implements OnInit {
   currentIndex = -1;
   category_name = '';
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.retrieveCategory();
@@ -47,8 +48,9 @@ export class CategoryListComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.refreshList();
+          this.toastrService.success("You remove all category's")
         },
-        error: (e) => console.error(e)
+        error: (e) => this.toastrService.error("Can't remove all category's")
       });
   }
 

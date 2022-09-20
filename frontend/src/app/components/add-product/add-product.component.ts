@@ -35,10 +35,9 @@ export class AddProductComponent implements OnInit {
       next: data => {
         //console.log(data);
         this.router.navigate(['/product']);
+        this.toastrService.success("This product has been add")
       },
-      error: e => {
-        console.error(e);
-      }
+      error: (e) => this.toastrService.error("Can't add this product")
     });
 
   }//insert_product
@@ -46,12 +45,10 @@ export class AddProductComponent implements OnInit {
   update_product(): void {
     this.product_service.update_product(this.new_product, this.route.snapshot.params["id"]).subscribe({
       next: data => {
-        //console.log(data);
         this.router.navigate(['/product']);
+        this.toastrService.success("This product has been updated")
       },
-      error: e => {
-        console.error(e);
-      }
+      error: (e) => this.toastrService.error("Can't update this product")
     });
   }//update_product
 
@@ -65,8 +62,4 @@ export class AddProductComponent implements OnInit {
       }
     });
   }//get_product
-
-  showAdd(): void {
-    this.toastrService.success('Add success!');
-  }//showAdd
 }//class

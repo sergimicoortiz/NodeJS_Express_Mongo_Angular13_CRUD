@@ -31,7 +31,8 @@
                     name="product_description" />
             </div>
 
-            <button (click)="insert_product()" (click)="showAdd()" class="btn btn-success">Submit</button>
+            <button (click)="insert_product()" class="btn btn-success" *ngIf="!update">Add</button>
+            <button (click)="update_product()" class="btn btn-success" *ngIf="update">Update</button>
         </div>
     </div>
 </div>
