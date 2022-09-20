@@ -1,5 +1,5 @@
 export class Category {
-    _id?:any;
+    slug?:any;
     category_name?:string;
     category_picture?:string;
 }

@@ -5,20 +5,23 @@
                 <div class="form-group">
                     <label for="category_name">Category name</label>
                     <input type="text" class="form-control" id="category_name" formControlName="category_name"
-                        [ngClass]="{ 'is-invalid': f['category_name'].invalid }" name="category_name" required />
+                        [ngClass]="{ 'is-invalid': f['category_name'].invalid && !firstSubmit}" name="category_name"
+                        required />
                 </div>
 
-                <div *ngIf=" f['category_name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['category_name'].errors['required']">Fullname is required</div>
-                </div>
-
-
+                <div *ngIf="f['category_name'].value.length == 0 && !firstSubmit" style="color: red;">
+                    <div>Category name is required</div>
+                </div><br>
 
                 <div class="form-group">
                     <label for="category_picture">Category picture</label>
                     <input class="form-control" id="category_picture" formControlName="category_picture"
-                        [ngClass]="{ 'is-invalid':f['category_picture'].invalid }" name="category_picture" required />
+                        [ngClass]="{ 'is-invalid':f['category_picture'].invalid && !firstSubmit}"
+                        name="category_picture" required />
                 </div>
+                <div *ngIf="f['category_picture'].value.length == 0 && !firstSubmit" style="color: red;">
+                    <div>Category picture is required</div>
+                </div><br>
 
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>

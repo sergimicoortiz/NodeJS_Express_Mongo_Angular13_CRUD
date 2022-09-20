@@ -51,7 +51,7 @@ export class CategoryDetailsComponent implements OnInit {
 
     this.message = '';
 
-    this.categoryService.update(this.currentCategory._id, data)
+    this.categoryService.update(this.currentCategory.slug, data)
       .subscribe({
         next: (res) => {
           this.toastrService.success("This category has been updated")
@@ -63,7 +63,7 @@ export class CategoryDetailsComponent implements OnInit {
   updateCategory(): void {
     this.message = '';
 
-    this.categoryService.update(this.currentCategory._id, this.currentCategory)
+    this.categoryService.update(this.currentCategory.slug, this.currentCategory)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -74,7 +74,7 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   deleteCategory(): void {
-    this.categoryService.delete(this.currentCategory._id)
+    this.categoryService.delete(this.currentCategory.slug)
       .subscribe({
         next: (res) => {
           console.log(res);

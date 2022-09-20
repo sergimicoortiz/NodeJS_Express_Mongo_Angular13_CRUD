@@ -1,5 +1,5 @@
 <div *ngIf="viewMode; else editable">
-    <div *ngIf="currentCategory._id">
+    <div *ngIf="currentCategory.slug">
         <h4>Category</h4>
         <div>
             <label><strong>Category name:</strong></label> {{ currentCategory.category_name }}
@@ -9,7 +9,7 @@
             {{ currentCategory.category_picture }}
         </div>
 
-        <a class="badge badge-warning" routerLink="/category/{{ currentCategory._id }}">
+        <a class="badge badge-warning" routerLink="/category/{{ currentCategory.slug }}">
             Edit
         </a>
     </div>
@@ -21,7 +21,7 @@
 </div>
 
 <ng-template #editable>
-    <div *ngIf="currentCategory._id" class="edit-form">
+    <div *ngIf="currentCategory.slug" class="edit-form">
         <h4>Category</h4>
         <form>
             <div class="form-group">
@@ -46,7 +46,7 @@
         <p>{{ message }}</p>
     </div>
 
-    <div *ngIf="!currentCategory._id">
+    <div *ngIf="!currentCategory.slug">
         <br />
         <p>Cannot access this category...</p>
     </div>
