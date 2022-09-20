@@ -1,11 +1,12 @@
 import Product from "../models/product_model.js";
+import { FormatSuccess } from "../utils/responseApi.js";
 
 async function getall_products(req, res) {
     try {
         const products = await Product.find();
         res.json(products);
     } catch (error) {
-        res.status(500).json({ msg: "An error has ocurred" });
+        res.status(500).json(FormatError("An error has ocurred", res.statusCode));
     }//end trycath
 }//getall_products
 
@@ -14,13 +15,13 @@ async function getone_product(req, res) {
         const id = req.params.id
         const product = await Product.findById(id);
         if (!product) {
-            res.status(404).json({ msg: "Product not found" })
+            res.status(404).json(FormatError("Product not found", res.statusCode));
         } else {
             res.json(product);
         };
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.kind === 'ObjectId') { res.status(404).json(FormatError("Product not found", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }
 };//getone_product
 
@@ -38,7 +39,7 @@ async function create_product(req, res) {
         const new_product = await product.save();
         res.json(new_product);
     } catch (error) {
-        res.status(500).json({ msg: "An error has ocurred" });
+        res.status(500).json(FormatError("An error has ocurred", res.statusCode));
     }//end try cath
 }//create_product
 
@@ -46,11 +47,11 @@ async function delete_product(req, res) {
     try {
         const id = req.params.id
         const product = await Product.findByIdAndDelete(id);
-        if (!product) { res.status(404).json({ msg: "Product not found" }); }
-        res.json({ msg: "Product deleted" })
+        if (!product) { res.status(404).json(FormatError("Product not found", res.statusCode)); }
+        res.json(FormatSuccess("Product deleted"));
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.kind === 'ObjectId') { res.status(404).json(FormatError("Product not found", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }//end try catch
 }//delete_product
 
@@ -66,21 +67,21 @@ async function update_product(req, res) {
             picture: req.body.picture || [null],
         };
         const update = await Product.findByIdAndUpdate(id, product_data);
-        //console.log(update);
-        if (!update) { res.status(404).json({ msg: "Product not found" }); }
+        if (!update) { res.status(404).json(FormatError("Product not found", res.statusCode)); }
         res.json({ msg: "Product updated" })
     } catch (error) {
-        if (error.kind === 'ObjectId') { res.status(404).json({ msg: "Product not found" }); }
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.kind === 'ObjectId') { res.status(404).json(FormatError("Product not found", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }
 }//update_product
 
 async function deleteAll_product(req, res) {
     try {
         const deleteALL = await Product.collection.drop();
-        res.json({ msg: "Colection products deleted" });
+        res.json(FormatSuccess("Colection products deleted"));
     } catch (error) {
-        res.status(500).json({ msg: "An error has ocurred" });
+        if (error.code === 26) { res.status(404).json(FormatError("Product colection not exist", res.statusCode)); }
+        else { res.status(500).json(FormatError("An error has ocurred", res.statusCode)); }
     }
 }//deleteAll_product
 
