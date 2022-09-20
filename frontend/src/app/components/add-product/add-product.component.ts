@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-product',
@@ -18,7 +19,7 @@ export class AddProductComponent implements OnInit {
     category: "",
     picture: ['p1test', 'p2test']
   };
-  constructor(private product_service: ProductService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private product_service: ProductService, private router: Router, private route: ActivatedRoute, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     if (this.route.snapshot.params["id"]) {
@@ -47,4 +48,8 @@ export class AddProductComponent implements OnInit {
   get_product(id: String): void {
     console.log(id);
   }//get_product
+
+  showAdd(): void {
+    this.toastrService.success('Add success!');
+  }//showAdd
 }//class
