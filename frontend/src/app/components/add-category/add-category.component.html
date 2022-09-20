@@ -1,41 +1,27 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
         <div class="submit-form">
-            <div *ngIf="!submitted">
+            <div>
                 <div class="form-group">
                     <label for="category_name">Category name</label>
-                    <input type="text" 
-                            class="form-control" 
-                            id="category_name" 
-                            formControlName="category_name"
-                            [(ngModel)]="category.category_name" 
-                            [ngClass]="{ 'is-invalid': submitted && f['category_name'].errors }"
-                            name="category_name" required/>
+                    <input type="text" class="form-control" id="category_name" formControlName="category_name"
+                        [ngClass]="{ 'is-invalid': f['category_name'].invalid }" name="category_name" required />
                 </div>
 
-                <div *ngIf="submitted && f['category_name'].errors" class="invalid-feedback">
+                <div *ngIf=" f['category_name'].errors" class="invalid-feedback">
                     <div *ngIf="f['category_name'].errors['required']">Fullname is required</div>
-                  </div>
+                </div>
 
 
 
                 <div class="form-group">
                     <label for="category_picture">Category picture</label>
-                    <input class="form-control" 
-                            id="category_picture"  
-                            formControlName="category_picture"
-                            [(ngModel)]="category.category_picture"
-                            [ngClass]="{ 'is-invalid': submitted && f['category_picture'].errors }"
-                            name="category_picture" required/>
+                    <input class="form-control" id="category_picture" formControlName="category_picture"
+                        [ngClass]="{ 'is-invalid':f['category_picture'].invalid }" name="category_picture" required />
                 </div>
 
-                <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+                <button class="btn btn-success" type="submit">Submit</button>
             </div>
-
-            <!-- <div *ngIf="submitted">
-                <h4>Category was submitted successfully!</h4>
-                <button class="btn btn-success" (click)="newCategory()">Add</button>
-            </div> -->
         </div>
     </div>
 </form>

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import slug from "slug"
+import uniqueValidator from 'mongoose-unique-validator';
 
 
 const category_shcema = new mongoose.Schema({
@@ -7,6 +8,8 @@ const category_shcema = new mongoose.Schema({
     category_name: String,
     category_picture: String
 });
+
+category_shcema.plugin(uniqueValidator, { msg: "already taken" });
 
 category_shcema.pre('validate', function (next) {
     if (!this.slug) {
