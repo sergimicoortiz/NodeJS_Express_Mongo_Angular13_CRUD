@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+const faker = require('@faker-js/faker/locale/en')
 
 function fake_products(n) {
     let products = [];

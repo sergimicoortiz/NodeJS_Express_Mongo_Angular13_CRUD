@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 
-const baseUrl = 'http://localhost:3001/category';
-const removeAllUrl = 'http://localhost:3001/category_all'
+const baseUrl = 'http://localhost:3001/api/category';
+const removeAllUrl = 'http://localhost:3001/api/category_all'
 
 @Injectable({
   providedIn: 'root'

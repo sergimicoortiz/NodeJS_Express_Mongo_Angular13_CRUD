@@ -1,6 +1,6 @@
-//https://stackoverflow.com/questions/7042340/error-cant-set-headers-after-they-are-sent-to-the-client
-import Category from "../models/category_model.js";
-import { FormatError, FormatSuccess } from '../utils/responseApi.js';
+const Category = require('../models/category_model.js');
+const FormatError = require('../utils/responseApi.js');
+const FormatSuccess = require('../utils/responseApi.js');
 
 async function getall_category(req, res) {
     try {
@@ -90,4 +90,4 @@ const category_controller = {
     deleteAll_category: deleteAll_category
 }
 
-export default category_controller;
+module.exports = category_controller;

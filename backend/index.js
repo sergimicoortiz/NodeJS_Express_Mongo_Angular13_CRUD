@@ -1,10 +1,9 @@
 "use strict";
 
-import dotenv from "dotenv"
-import express from "express"
-import cors from 'cors';
-import router from "./app/router/router.js";
-import connectdb from "./app/config/config_db.js";
+const dotenv = require("dotenv")
+const express = require("express");
+const cors = require("cors");
+const connectdb = require("./app/config/config_db")
 
 const cors_options = {
     origin: process.env.CORSURL || "http://localhost:4200"
@@ -16,7 +15,7 @@ const app = express();
 connectdb();
 app.use(cors(cors_options));
 app.use(express.json());
-app.use(router);
+app.use(require("./app/router/index"));
 app.listen(PORT, () => {
     console.log(`The app is in 127.0.0.1:${PORT}`);
 })//listen

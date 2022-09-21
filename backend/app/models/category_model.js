@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
-import slug from "slug"
-import uniqueValidator from 'mongoose-unique-validator';
+const mongoose = require('mongoose');
+const slug = require('slug');
+const uniqueValidator = require('mongoose-unique-validator');
+
 
 
 const category_shcema = new mongoose.Schema({
@@ -25,4 +26,4 @@ category_shcema.methods.slugify = function () {
 
 const Category = mongoose.model('Category', category_shcema);
 
-export default Category;
+module.exports = Category;

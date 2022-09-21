@@ -35,7 +35,15 @@ exports.validation = (errors) => {
     };
 }; */
 
-export const FormatError = (msg, status) => {
+// export const FormatError = (msg, status) => {
+//     return {
+//         type: "error",
+//         msg: msg,
+//         ErrorCode: status
+//     }
+// }//FormatError
+
+module.exports = FormatError = (msg, status) => {
     return {
         type: "error",
         msg: msg,
@@ -43,17 +51,17 @@ export const FormatError = (msg, status) => {
     }
 }//FormatError
 
-export const FormatSuccess = (msg, obj = null) => {
-    if (obj) {
-        return {
-            type: "success",
-            msg: msg,
-            data: obj
-        }
-    } else {
-        return {
-            type: "success",
-            msg: msg
-        }
-    }
-}//FormatSucces
+// export const FormatSuccess = (msg, obj = null) => {
+//     if (obj) {
+//         return {
+//             type: "success",
+//             msg: msg,
+//             data: obj
+//         }
+//     } else {
+//         return {
+//             type: "success",
+//             msg: msg
+//         }
+//     }
+// }//FormatSucces

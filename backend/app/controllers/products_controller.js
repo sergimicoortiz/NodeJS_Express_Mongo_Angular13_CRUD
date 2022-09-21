@@ -1,5 +1,6 @@
-import Product from "../models/product_model.js";
-import { FormatSuccess, FormatError } from "../utils/responseApi.js";
+const Product = require('../models/product_model.js');
+const FormatError = require('../utils/responseApi.js');
+const FormatSuccess = require('../utils/responseApi.js');
 
 async function getall_products(req, res) {
     try {
@@ -98,4 +99,4 @@ const product_controller = {
     deleteAll_product: deleteAll_product
 }
 
-export default product_controller;
+module.exports = product_controller

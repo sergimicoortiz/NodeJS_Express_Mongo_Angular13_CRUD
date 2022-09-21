@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
-import slug from "slug"
-import uniqueValidator from 'mongoose-unique-validator'; //https://www.npmjs.com/package/mongoose-unique-validator
+const mongoose = require('mongoose');
+const slug = require('slug');
+const uniqueValidator = require('mongoose-unique-validator');
+
 
 const product_shcema = new mongoose.Schema({
     slug: { type: String, lowercase: true, unique: true },
@@ -27,4 +28,4 @@ product_shcema.methods.slugify = function () {
 
 const Product = mongoose.model('Product', product_shcema);
 
-export default Product;
+module.exports = Product

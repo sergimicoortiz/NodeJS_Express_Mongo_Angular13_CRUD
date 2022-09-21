@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../models/product.model';
 
-const URL = 'http://localhost:3001/products';
+const URL = 'http://localhost:3001/api/products';
 
 
 @Injectable({

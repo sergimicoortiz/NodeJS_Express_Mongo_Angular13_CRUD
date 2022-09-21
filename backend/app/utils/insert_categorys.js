@@ -1,9 +1,9 @@
 "use strict";
 
-import dotenv from "dotenv"
-import connectdb from "../config/config_db.js"
-import categorys from './data_categorys.js'
-import Category from '../models/category_model.js'
+const dotenv = require('dotenv');
+const connectdb = require('../config/config_db.js');
+const categorys = require('../data_categorys.js');
+const Category = require('../models/category_model.js');
 
 dotenv.config();
 connectdb(process.env.MONGO_URI).
