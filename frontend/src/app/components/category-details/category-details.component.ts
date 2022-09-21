@@ -66,7 +66,7 @@ export class CategoryDetailsComponent implements OnInit {
     this.categoryService.update(this.currentCategory.slug, this.currentCategory)
       .subscribe({
         next: (res) => {
-          console.log(res);
+          this.router.navigate(['/category']);
           this.toastrService.success("This category has been updated")
         },
         error: (e) => this.toastrService.error("Can't update this category")
@@ -77,7 +77,6 @@ export class CategoryDetailsComponent implements OnInit {
     this.categoryService.delete(this.currentCategory.slug)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.router.navigate(['/category']);
           this.toastrService.success("This category has been removed")
         },
