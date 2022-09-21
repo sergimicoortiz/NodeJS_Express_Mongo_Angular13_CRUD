@@ -21,7 +21,7 @@
             <label><strong>Owner:</strong></label> {{ currentProduct.owner }}
         </div>
 
-        <a class="badge badge-warning" routerLink="/update/product/{{ currentProduct.slug }}">
+        <a class="badge badge-warning" routerLink="/product/update/{{ currentProduct.slug }}">
             Edit
         </a>
         <a class="badge badge-danger mr-2" (click)="deleteProduct(currentProduct.slug)">Delete</a>
