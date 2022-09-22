@@ -77,4 +77,4 @@ const categorys = [
     }
 ];
 
-export default categorys;
+module.exports = categorys;

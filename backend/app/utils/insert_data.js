@@ -1,14 +1,13 @@
 "use strict";
 
-import dotenv from "dotenv";
-import connectdb from "../config/config_db.js";
-import fake_products from "./fake_products.js";
-import Product from "../models/product_model.js";
-import Category from '../models/category_model.js';
-import categorys from './data_categorys.js';
+require('dotenv').config();
+const connectdb = require("../config/config_db.js");
+const fake_products = require("./fake_products.js");
+const Product = require("../models/product_model.js");
+const Category = require('../models/category_model.js');
+const categorys = require('./data_categorys.js');
 
 async function main() {
-    dotenv.config();
     try {
         await connectdb(process.env.MONGO_URI)
         const products = fake_products(process.env.DUMMY_PRODUCTS || 10);

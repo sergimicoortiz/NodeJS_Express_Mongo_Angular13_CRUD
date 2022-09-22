@@ -1,6 +1,6 @@
 const Product = require('../models/product_model.js');
-const FormatError = require('../utils/responseApi.js');
-const FormatSuccess = require('../utils/responseApi.js');
+const FormatError = require('../utils/responseApi.js').FormatError;
+const FormatSuccess = require('../utils/responseApi.js').FormatSuccess;
 
 async function getall_products(req, res) {
     try {

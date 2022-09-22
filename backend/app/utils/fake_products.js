@@ -1,4 +1,5 @@
-const faker = require('@faker-js/faker/locale/en')
+const faker = require('@faker-js/faker/locale/en').faker;
+const categorys = require('./data_categorys.js');
 
 function fake_products(n) {
     let products = [];
@@ -20,4 +21,4 @@ function fake_products(n) {
     return products;
 }
 
-export default fake_products;
+module.exports = fake_products;
