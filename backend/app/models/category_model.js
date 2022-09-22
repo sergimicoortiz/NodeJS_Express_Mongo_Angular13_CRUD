@@ -24,6 +24,4 @@ category_shcema.methods.slugify = function () {
     this.slug = slug(this.category_name) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };//slugify
 
-const Category = mongoose.model('Category', category_shcema);
-
-module.exports = Category;
+mongoose.model('Category', category_shcema);

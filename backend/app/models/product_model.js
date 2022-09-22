@@ -26,6 +26,4 @@ product_shcema.methods.slugify = function () {
     this.slug = slug(this.name) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };//slugify
 
-const Product = mongoose.model('Product', product_shcema);
-
-module.exports = Product
+mongoose.model('Product', product_shcema);

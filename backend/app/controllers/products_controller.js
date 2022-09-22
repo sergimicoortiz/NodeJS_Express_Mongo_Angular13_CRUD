@@ -1,4 +1,5 @@
-const Product = require('../models/product_model.js');
+const mongoose = require('mongoose');
+const Product = mongoose.model('Product');
 const FormatError = require('../utils/responseApi.js').FormatError;
 const FormatSuccess = require('../utils/responseApi.js').FormatSuccess;
 

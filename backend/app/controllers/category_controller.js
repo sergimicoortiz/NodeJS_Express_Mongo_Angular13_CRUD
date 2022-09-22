@@ -1,4 +1,5 @@
-const Category = require('../models/category_model.js');
+const mongoose = require('mongoose');
+const Category = mongoose.model('Category');
 const FormatError = require('../utils/responseApi.js').FormatError;
 const FormatSuccess = require('../utils/responseApi.js').FormatSuccess;
 
