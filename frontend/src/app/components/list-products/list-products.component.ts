@@ -28,15 +28,17 @@ export class ListProductsComponent implements OnInit {
   }
 
   all_products(): void {
-    this.productService.all_products().subscribe({
-      next: data => {
-        this.products = data;
-        //console.log(data);
-      },
-      error: e => {
-        console.error(e);
-      }
-    })//subscribe
+    if (this.productService.products.length == 0) {
+      this.productService.all_products().subscribe({
+        next: data => this.productService.products = data,
+        error: e => console.error(e)
+      });
+    }
+    this.productService.products$.subscribe({
+      next: data => this.products = data,
+      error: e => console.error(e)
+    });
+
   }//all_products
 
   set_product(product: Product, i: Number): void {
@@ -47,7 +49,6 @@ export class ListProductsComponent implements OnInit {
   delete_all_product(): void {
     this.productService.delete_all_products().subscribe({
       next: data => {
-        //console.log(data);
         this.products = [];
         this.toastrService.success("All products has been removed")
       },

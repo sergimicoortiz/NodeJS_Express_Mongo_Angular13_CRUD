@@ -39,8 +39,7 @@ export class DetailProductComponent implements OnInit {
   deleteProduct(id: String): void {
     this.productService.delete_product(id).subscribe({
       next: data => {
-        console.log(data);
-        window.location.reload();
+        this.productService.products = this.productService.products.filter(p => p.slug !== this.currentProduct.slug);
         this.toastrService.success("This product has been removed")
       },//next
       error: (e) => this.toastrService.error("Can't remove this product")
